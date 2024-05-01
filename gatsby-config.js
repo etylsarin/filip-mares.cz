@@ -49,21 +49,12 @@ module.exports = {
     },
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
-    {
-      resolve: require.resolve(`@nrwl/gatsby/plugins/nx-gatsby-ext-plugin`),
-      options: {
-        path: __dirname,
-      },
-    },
     `gatsby-plugin-sharp`,
     "gatsby-plugin-sitemap",
     `gatsby-plugin-offline`,
     {
       resolve: "gatsby-plugin-mdx",
       options: {
-        defaultLayouts: {
-          default: require.resolve("./src/components/layout.tsx")
-        },
         gatsbyRemarkPlugins: [
           {
             resolve: `gatsby-remark-images`,
@@ -72,12 +63,7 @@ module.exports = {
             }
           },
         ],
-        rehypePlugins: [
-          {
-            resolve: 'rehype-slug'
-          }
-        ]
-      }
+      },
     },
     {
       resolve: `gatsby-plugin-google-gtag`,

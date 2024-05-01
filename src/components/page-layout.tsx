@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import clasNames from "classnames";
 
-import * as styles from "./layout.module.scss";
+import * as styles from "./page-layout.module.scss";
 
-const Layout = ({ pageContext, children }) => {
+export const PageLayout = ({ pageContext, children }) => {
   const { site: { siteMetadata }} = useStaticQuery(graphql`
     query {
       site {
@@ -78,4 +78,4 @@ const Layout = ({ pageContext, children }) => {
   );
 };
 
-export default Layout;
+export default PageLayout;
