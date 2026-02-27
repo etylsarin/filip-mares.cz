@@ -1,0 +1,4 @@
+# Optional redirect rules for hosts like Netlify/Cloudflare Pages.
+# GitHub Pages ignores this file.
+
+/* https://filip-mares.dev/:splat 301!
