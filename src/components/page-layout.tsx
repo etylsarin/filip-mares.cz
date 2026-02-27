@@ -5,7 +5,9 @@ import clasNames from "classnames";
 
 import * as styles from "./page-layout.module.scss";
 
-export const PageLayout = ({ pageContext, children }) => {
+const CANONICAL_ORIGIN = "https://filip-mares.dev";
+
+export const PageLayout = ({ pageContext, children, location }) => {
   const { site: { siteMetadata }} = useStaticQuery(graphql`
     query {
       site {
@@ -16,18 +18,32 @@ export const PageLayout = ({ pageContext, children }) => {
       }
     }
   `);
-  const TITLE = `${pageContext.frontmatter.title} | ${siteMetadata.title}`;
-  const DESC = pageContext.frontmatter.description || siteMetadata.description;  
+  const frontmatter = pageContext?.frontmatter || {};
+  const pageTitle = frontmatter.title;
+  const TITLE = pageTitle ? `${pageTitle} | ${siteMetadata.title}` : siteMetadata.title;
+  const DESC = frontmatter.description || siteMetadata.description;
+  const pathname = location?.pathname || "/";
+  const canonicalUrl = new URL(pathname, CANONICAL_ORIGIN).toString();
 
   return (
     <div className={styles.page}>
       <Helmet
         htmlAttributes={{ lang: 'cs' }}
         title={TITLE}
+        link={[
+          {
+            rel: "canonical",
+            href: canonicalUrl,
+          },
+        ]}
         meta={[
           {
             name: `description`,
             content: DESC,
+          },
+          {
+            property: `og:url`,
+            content: canonicalUrl,
           },
           {
             property: `og:title`,
@@ -44,6 +60,10 @@ export const PageLayout = ({ pageContext, children }) => {
           {
             name: `twitter:card`,
             content: `summary`,
+          },
+          {
+            name: `twitter:url`,
+            content: canonicalUrl,
           },
           {
             name: `twitter:title`,

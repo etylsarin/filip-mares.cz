@@ -6,7 +6,7 @@ module.exports = {
     title: pkg.description,
     description: DESC,
     author: pkg.author,
-    siteUrl: pkg.homepage,
+    siteUrl: 'https://filip-mares.dev/',
   },
   plugins: [
     {
